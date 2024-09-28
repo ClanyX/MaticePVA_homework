@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MaticePVA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f37f7d241cd1a5cc9709255ae1588d40d41cc00e")]
 [assembly: System.Reflection.AssemblyProductAttribute("MaticePVA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MaticePVA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

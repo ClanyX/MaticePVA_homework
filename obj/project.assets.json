@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "P:\\MaticePVA\\MaticePVA.csproj",
+      "projectUniqueName": "P:\\MaticeProject\\MaticePVA.csproj",
       "projectName": "MaticePVA",
-      "projectPath": "P:\\MaticePVA\\MaticePVA.csproj",
+      "projectPath": "P:\\MaticeProject\\MaticePVA.csproj",
       "packagesPath": "C:\\Users\\sandi\\.nuget\\packages\\",
-      "outputPath": "P:\\MaticePVA\\obj\\",
+      "outputPath": "P:\\MaticeProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -24,7 +24,7 @@ namespace MaticePVA
         static int operace()
         {
             int ope;
-            Console.WriteLine("Vyber operaci\n1. soušet\n2. rozdíl\n3. Transponování\n4. Vynásobení jedné matice číslem\n5.součin");
+            Console.WriteLine("Vyber operaci\n1. soušet\n2. rozdíl\n3. transponování\n4. vynásobení jedné matice číslem\n5. součin");
             Console.Write("Operace: ");
             ope = Convert.ToInt32(Console.ReadLine());
             if (ope < 1 || ope > 5)
@@ -50,9 +50,23 @@ namespace MaticePVA
             int[,] matice2 = new int[x, y];
             matice(matice2);
 
-            if (matice1.GetLength(0) == matice2.GetLength(1) && matice1.GetLength(1) == matice2.GetLength(1))
+            int[,] resultMatice = new int[matice1.GetLength(0), matice1.GetLength(1)];
+
+            if (matice1.GetLength(0) == matice2.GetLength(0) && matice1.GetLength(1) == matice2.GetLength(1))
             {
-                Console.WriteLine("True");
+                for (int i = 0; i < resultMatice.GetLength(1); i++)
+                {
+                    for (int j = 0; j < resultMatice.GetLength(0); j++)
+                    {
+                        resultMatice[i,j] = matice1[i,j] + matice2[i,j];
+                    }
+                }
+                VypisMatice(resultMatice);
+            }
+            else
+            {
+                Console.WriteLine("Matice musí být stejně velké!!");
+                operace();
             }
 
         }
@@ -84,6 +98,19 @@ namespace MaticePVA
                 for (int j = 0; j < arr.GetLength(0); j++)
                 {
                     arr[i, j] = rnd.Next(-101, 101);
+                }
+            }
+        }
+
+        static void VypisMatice(int[,] arr)
+        {
+            //sloupec
+            for (int i = 0; i < arr.GetLength(1); i++)
+            {
+                //radek
+                for (int j = 0; j < arr.GetLength(0); j++)
+                {
+                    Console.WriteLine(arr[i,j]);
                 }
             }
         }
