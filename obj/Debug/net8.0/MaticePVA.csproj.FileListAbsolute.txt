@@ -1,0 +1,14 @@
+P:\MaticePVA\bin\Debug\net8.0\MaticePVA.exe
+P:\MaticePVA\bin\Debug\net8.0\MaticePVA.deps.json
+P:\MaticePVA\bin\Debug\net8.0\MaticePVA.runtimeconfig.json
+P:\MaticePVA\bin\Debug\net8.0\MaticePVA.dll
+P:\MaticePVA\bin\Debug\net8.0\MaticePVA.pdb
+P:\MaticePVA\obj\Debug\net8.0\MaticePVA.GeneratedMSBuildEditorConfig.editorconfig
+P:\MaticePVA\obj\Debug\net8.0\MaticePVA.AssemblyInfoInputs.cache
+P:\MaticePVA\obj\Debug\net8.0\MaticePVA.AssemblyInfo.cs
+P:\MaticePVA\obj\Debug\net8.0\MaticePVA.csproj.CoreCompileInputs.cache
+P:\MaticePVA\obj\Debug\net8.0\MaticePVA.dll
+P:\MaticePVA\obj\Debug\net8.0\refint\MaticePVA.dll
+P:\MaticePVA\obj\Debug\net8.0\MaticePVA.pdb
+P:\MaticePVA\obj\Debug\net8.0\MaticePVA.genruntimeconfig.cache
+P:\MaticePVA\obj\Debug\net8.0\ref\MaticePVA.dll
