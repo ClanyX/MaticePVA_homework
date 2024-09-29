@@ -42,15 +42,13 @@ namespace MaticePVA
 
         static void Soucet()
         {
-            int x = 0;
-            int y = 0;
-            Console.WriteLine("Sčítání");
+            Console.WriteLine("Soušet");
             Console.WriteLine("První matice");
-            int[,] matice1 = new int[VelikostRadek(), VelikostSloupec()];
+            int[,] matice1 = new int[VelikostSloupec(), VelikostRadek()];
             matice(matice1);
 
             Console.WriteLine("Druhá matice");
-            int[,] matice2 = new int[VelikostRadek(), VelikostSloupec()];
+            int[,] matice2 = new int[VelikostSloupec(), VelikostRadek()];
             matice(matice2);
 
             if (matice1.GetLength(0) == matice2.GetLength(0) && matice1.GetLength(1) == matice2.GetLength(1))
@@ -80,7 +78,65 @@ namespace MaticePVA
 
         static void Rozdil()
         {
+            bool direction = false;
+            Console.WriteLine("1. A - B\n2. B - A");
+            char number = Convert.ToChar(Console.ReadLine());
+            if (number == '1')
+                direction = true;
+            else 
+                direction = false;
 
+            Console.WriteLine("Rozdíl");
+            Console.WriteLine("První matice");
+            int[,] matice1 = new int[VelikostSloupec(), VelikostRadek()];
+            matice(matice1);
+
+            Console.WriteLine("Druhá matice");
+            int[,] matice2 = new int[VelikostSloupec(), VelikostRadek()];
+            matice(matice2);
+
+            if (matice1.GetLength(0) == matice2.GetLength(0) && matice1.GetLength(1) == matice2.GetLength(1))
+            {
+                if(direction)
+                {
+                    VypisMatice(matice1);
+                    Console.WriteLine("-");
+                    VypisMatice(matice2);
+                    Console.WriteLine("=");
+
+                    for (int i = 0; i < matice1.GetLength(1); i++)
+                    {
+                        for (int j = 0; j < matice1.GetLength(0); j++)
+                        {
+                            matice1[j, i] += matice2[j, i];
+                        }
+                    }
+                    VypisMatice(matice1);
+                }
+                else
+                {
+                    VypisMatice(matice2);
+                    Console.WriteLine("-");
+                    VypisMatice(matice1);
+                    Console.WriteLine("=");
+
+                    for (int i = 0; i < matice2.GetLength(1); i++)
+                    {
+                        for (int j = 0; j < matice2.GetLength(0); j++)
+                        {
+                            matice2[j, i] += matice1[j, i];
+                        }
+                    }
+                    VypisMatice(matice2);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Matice musí být stejně velké!!");
+                Start();
+            }
+            Console.WriteLine();
+            Start();
         }
 
         static int VelikostRadek()
