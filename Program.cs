@@ -6,11 +6,14 @@ namespace MaticePVA
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Zmáčkni jakékoliv tlačítko pro start...");
             Start();
         }
 
         static void Start()
         {
+            Console.ReadKey();
+            Console.Clear();
             int operation = operace();
             switch (operation)
             {
@@ -22,6 +25,25 @@ namespace MaticePVA
                     Rozdil();
                     break;
 
+                case 3:
+                    Transponovani();
+                    break;
+
+                case 4:
+                    NasobeniCislem();
+                    break;
+
+                case 5:
+                    Nasobeni();
+                    break;
+
+                case 6:
+                    Environment.Exit(0);
+                    break;
+
+                default:
+                    Start();
+                    break;
             }
         }
 
@@ -29,13 +51,13 @@ namespace MaticePVA
         static int operace()
         {
             int ope;
-            Console.WriteLine("Vyber operaci\n1. soušet\n2. rozdíl\n3. transponování\n4. vynásobení jedné matice číslem\n5. součin");
-            Console.Write("Operace: ");
+            Console.WriteLine("Vyber operaci\n1. součet\n2. rozdíl\n3. transponování\n4. vynásobení jedné matice číslem\n5. součin\n6. exit");
+            Console.Write("Operace(číslo): ");
             ope = Convert.ToInt32(Console.ReadLine());
-            if (ope < 1 || ope > 5)
+            if (ope < 1 || ope > 6)
             {
                 Console.WriteLine("Špatně zadaná operace...\nZadej novou operaci.");
-                ope = operace();
+                Start();
             }
             return ope;
         }
@@ -139,22 +161,93 @@ namespace MaticePVA
             Start();
         }
 
+        static void Transponovani()
+        {
+            Console.WriteLine("Matice");
+            int[,] matice1 = new int[VelikostSloupec(), VelikostRadek()];
+            matice(matice1);
+            VypisMatice(matice1);
+
+            Console.WriteLine("Transponovaná matice");
+
+            int[,] resultMatice = new int[matice1.GetLength(1), matice1.GetLength(0)];
+            for (int i = 0; i < matice1.GetLength(1); i++)
+            {
+                for (int j = 0; j < matice1.GetLength(0); j++)
+                {
+                    resultMatice[i, j] = matice1[j, i];
+                }
+            }
+            VypisMatice(resultMatice);
+            Console.WriteLine();
+            Start();
+        }
+
+        static void NasobeniCislem()
+        {
+            Console.WriteLine("Matice");
+            Console.Write("Zadej číslo pro násobení: ");
+            int number = Convert.ToInt32(Console.ReadLine());
+            int[,] matice1 = new int[VelikostSloupec(), VelikostRadek()];
+            matice(matice1);
+            VypisMatice(matice1);
+            Console.WriteLine($"*\n{number}\n=");
+            for (int i = 0; i < matice1.GetLength(1); i++)
+            {
+                for (int j = 0; j < matice1.GetLength(0); j++)
+                {
+                    matice1[j, i] *= number;
+                }
+            }
+            VypisMatice(matice1);
+            Console.WriteLine();
+            Start();
+        }
+
+        static void Nasobeni()
+        {
+
+        }
+
+        //funkcni promenne
         static int VelikostRadek()
         {
             //row
             Console.Write("Zadej velikost matice řádek = ");
             int row = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                if(row == 0)
+                {
+                    throw new Exception("Číslo nemuže být nula!!");
+                }               
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                Start();
+            }
             return row;
         }
-
         static int VelikostSloupec()
         {
             //colum
             Console.Write("Zadej velikost matice sloupec = ");
             int colum = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                if (colum == 0)
+                {
+                    throw new Exception("Číslo nemuže být nula!!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Start();
+            }
             return colum;
         }
-
         static void matice(int[,] arr)
         {
             Random rnd = new Random();
@@ -169,7 +262,6 @@ namespace MaticePVA
                 }
             }
         }
-
         static void VypisMatice(int[,] arr)
         {
             //sloupec
