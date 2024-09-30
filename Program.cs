@@ -206,10 +206,38 @@ namespace MaticePVA
 
         static void Nasobeni()
         {
+            Console.WriteLine("Násobení");
+            Console.WriteLine("První matice");
+            int[,] matice1 = new int[VelikostSloupec(), VelikostRadek()];
+            matice(matice1);
 
+            Console.WriteLine("Druhá matice");
+            int[,] matice2 = new int[VelikostSloupec(), VelikostRadek()];
+            matice(matice2);
+
+            if(matice1.GetLength(1) != matice2.GetLength(0))
+            {
+                Console.WriteLine("Matice 1 musí mít stejný počet sloupců jako matice 2 řádků!!");
+                Start();
+            }
+
+            int[,] result = new int[matice1.GetLength(0), matice2.GetLength(1)];
+
+            result[0, 0] = 12;
+            result[0, 1] = 55;
+
+            for (int i = 0; i < result.GetLength(1); i++)
+            {
+                for (int j = 0; j < result.GetLength(0); j++)
+                {
+                    Console.WriteLine(result[i,j]);
+                }
+            }
+            VypisMatice(result);
+            
         }
 
-        //funkcni promenne
+        //funkcni metody
         static int VelikostRadek()
         {
             //row
