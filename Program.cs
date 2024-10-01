@@ -210,11 +210,11 @@ namespace MaticePVA
         {
             Console.WriteLine("Násobení");
             Console.WriteLine("První matice");
-            int[,] matice1 = new int[VelikostSloupec(), VelikostRadek()];
+            int[,] matice1 = new int[VelikostRadek(), VelikostSloupec()];
             matice(matice1);
 
             Console.WriteLine("Druhá matice");
-            int[,] matice2 = new int[VelikostSloupec(), VelikostRadek()];
+            int[,] matice2 = new int[VelikostRadek(), VelikostSloupec()];
             matice(matice2);
 
             if(matice1.GetLength(1) != matice2.GetLength(0))
@@ -223,27 +223,28 @@ namespace MaticePVA
                 Start();
             }
 
-            int[,] result = new int[matice1.GetLength(0), matice2.GetLength(1)];
-            int n = result.Length;
-
-            VypisMatice(matice1);
+            VypisMaticeFixed(matice1);
             Console.WriteLine("*");
-            VypisMatice(matice2);
+            VypisMaticeFixed(matice2);
             Console.WriteLine("=");
 
-            for (int i = 0; i < matice1.GetLength(0); i++)
+            int AR = matice1.GetLength(0);
+            int AC = matice1.GetLength(1);
+            int BC = matice2.GetLength(1);
+            int[,] result = new int[AR, BC];
+
+            for (int i = 0; i < AR; i++)
             {
-                for (int j = 0; j < matice2.GetLength(1); j++)
+                for (int j = 0; j < BC; j++)
                 {
-                    result[i, j] = 0;
-                    for (int k = 0; k < matice1.GetLength(1); k++)
+                    for (int k = 0; k < AC; k++)
                     {
                         result[i, j] += matice1[i, k] * matice2[k, j];
                     }
                 }
             }
 
-            VypisMatice(result);
+            VypisMaticeFixed(result);
             Console.WriteLine();
             Start();
         }
@@ -310,6 +311,20 @@ namespace MaticePVA
                 for (int j = 0; j < arr.GetLength(0); j++)
                 {
                     Console.Write(arr[j, i] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        static void VypisMaticeFixed(int[,] arr)
+        {
+            //sloupec
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                //radek
+                for (int j = 0; j < arr.GetLength(1); j++)
+                {
+                    Console.Write(arr[i, j] + " ");
                 }
                 Console.WriteLine();
             }
