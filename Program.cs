@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Security.Cryptography;
 
 namespace MaticePVA
 {
@@ -222,19 +224,28 @@ namespace MaticePVA
             }
 
             int[,] result = new int[matice1.GetLength(0), matice2.GetLength(1)];
+            int n = result.Length;
 
-            result[0, 0] = 12;
-            result[0, 1] = 55;
+            VypisMatice(matice1);
+            Console.WriteLine("*");
+            VypisMatice(matice2);
+            Console.WriteLine("=");
 
-            for (int i = 0; i < result.GetLength(1); i++)
+            for (int i = 0; i < matice1.GetLength(0); i++)
             {
-                for (int j = 0; j < result.GetLength(0); j++)
+                for (int j = 0; j < matice2.GetLength(1); j++)
                 {
-                    Console.WriteLine(result[i,j]);
+                    result[i, j] = 0;
+                    for (int k = 0; k < matice1.GetLength(1); k++)
+                    {
+                        result[i, j] += matice1[i, k] * matice2[k, j];
+                    }
                 }
             }
+
             VypisMatice(result);
-            
+            Console.WriteLine();
+            Start();
         }
 
         //funkcni metody
