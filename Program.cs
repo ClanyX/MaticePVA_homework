@@ -14,65 +14,59 @@ namespace MaticePVA
 
         static void Start()
         {
-            Console.ReadKey();
-            Console.Clear();
-            int operation = operace();
-            switch (operation)
+            while (true)
             {
-                case 1:
-                    Soucet();
-                    break;
+                Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("Vyber operaci\n1. Součet\n2. Rozdíl\n3. Transponování\n4. Násobení skalárem\n5. Součin\n6. EXIT");
+                Console.Write("Operace(číslo): ");
+                if (int.TryParse(Console.ReadLine(), out int operation))
+                {
+                    switch (operation)
+                    {
+                        case 1:
+                            Soucet();
+                            break;
 
-                case 2:
-                    Rozdil();
-                    break;
+                        case 2:
+                            Rozdil();
+                            break;
 
-                case 3:
-                    Transponovani();
-                    break;
+                        case 3:
+                            Transponovani();
+                            break;
 
-                case 4:
-                    NasobeniCislem();
-                    break;
+                        case 4:
+                            NasobeniCislem();
+                            break;
 
-                case 5:
-                    Nasobeni();
-                    break;
+                        case 5:
+                            Nasobeni();
+                            break;
 
-                case 6:
-                    Environment.Exit(0);
-                    break;
+                        case 6:
+                            Environment.Exit(0);
+                            break;
 
-                default:
-                    Start();
-                    break;
+                        default:
+                            Console.WriteLine("Špatně zadaná operace...\nZadej novou operaci.");
+                            Start();
+                            break;
+                    }
+                }
+                else
+                    Console.WriteLine("Neplatný vstup, zadej číslo...");
             }
-        }
-
-        //vyber operace
-        static int operace()
-        {
-            int ope;
-            Console.WriteLine("Vyber operaci\n1. součet\n2. rozdíl\n3. transponování\n4. vynásobení jedné matice číslem\n5. součin\n6. exit");
-            Console.Write("Operace(číslo): ");
-            ope = Convert.ToInt32(Console.ReadLine());
-            if (ope < 1 || ope > 6)
-            {
-                Console.WriteLine("Špatně zadaná operace...\nZadej novou operaci.");
-                Start();
-            }
-            return ope;
         }
 
         static void Soucet()
         {
-            Console.WriteLine("Soušet");
-            Console.WriteLine("První matice");
-            int[,] matice1 = new int[VelikostSloupec(), VelikostRadek()];
+            Console.WriteLine("Soušet\nPrvní matice");
+            int[,] matice1 = new int[VelikostRadek(), VelikostSloupec()];
             matice(matice1);
 
             Console.WriteLine("Druhá matice");
-            int[,] matice2 = new int[VelikostSloupec(), VelikostRadek()];
+            int[,] matice2 = new int[VelikostRadek(), VelikostSloupec()];
             matice(matice2);
 
             if (matice1.GetLength(0) == matice2.GetLength(0) && matice1.GetLength(1) == matice2.GetLength(1))
@@ -96,7 +90,6 @@ namespace MaticePVA
                 Console.WriteLine("Matice musí být stejně velké!!");
                 Start();
             }
-            Console.WriteLine();
             Start();
         }
 
@@ -104,19 +97,34 @@ namespace MaticePVA
         {
             bool direction = false;
             Console.WriteLine("1. A - B\n2. B - A");
-            char number = Convert.ToChar(Console.ReadLine());
-            if (number == '1')
-                direction = true;
-            else 
-                direction = false;
+            if (int.TryParse(Console.ReadLine(), out int number))
+            {
+                switch (number)
+                {
+                    case 1:
+                        direction = true;
+                        break;
+                    case 2:
+                        direction = false;
+                        break;
+                    default:
+                        Console.WriteLine("Pouze číslo 1 nebo 2!");
+                        Start();
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Neplatný vstup, zadej číslo...");
+                Start();
+            }
 
-            Console.WriteLine("Rozdíl");
-            Console.WriteLine("První matice");
-            int[,] matice1 = new int[VelikostSloupec(), VelikostRadek()];
+            Console.WriteLine("Rozdíl\nPrvní matice");
+            int[,] matice1 = new int[VelikostRadek(), VelikostSloupec()];
             matice(matice1);
 
             Console.WriteLine("Druhá matice");
-            int[,] matice2 = new int[VelikostSloupec(), VelikostRadek()];
+            int[,] matice2 = new int[VelikostRadek(), VelikostSloupec()];
             matice(matice2);
 
             if (matice1.GetLength(0) == matice2.GetLength(0) && matice1.GetLength(1) == matice2.GetLength(1))
@@ -128,11 +136,11 @@ namespace MaticePVA
                     VypisMatice(matice2);
                     Console.WriteLine("=");
 
-                    for (int i = 0; i < matice1.GetLength(1); i++)
+                    for (int i = 0; i < matice1.GetLength(0); i++)
                     {
-                        for (int j = 0; j < matice1.GetLength(0); j++)
+                        for (int j = 0; j < matice1.GetLength(1); j++)
                         {
-                            matice1[j, i] += matice2[j, i];
+                            matice1[i, j] += matice2[i, j];
                         }
                     }
                     VypisMatice(matice1);
@@ -144,11 +152,11 @@ namespace MaticePVA
                     VypisMatice(matice1);
                     Console.WriteLine("=");
 
-                    for (int i = 0; i < matice2.GetLength(1); i++)
+                    for (int i = 0; i < matice2.GetLength(0); i++)
                     {
-                        for (int j = 0; j < matice2.GetLength(0); j++)
+                        for (int j = 0; j < matice2.GetLength(1); j++)
                         {
-                            matice2[j, i] += matice1[j, i];
+                            matice2[i, j] += matice1[i, j];
                         }
                     }
                     VypisMatice(matice2);
@@ -159,14 +167,13 @@ namespace MaticePVA
                 Console.WriteLine("Matice musí být stejně velké!!");
                 Start();
             }
-            Console.WriteLine();
             Start();
         }
 
         static void Transponovani()
         {
             Console.WriteLine("Matice");
-            int[,] matice1 = new int[VelikostSloupec(), VelikostRadek()];
+            int[,] matice1 = new int[VelikostRadek(), VelikostSloupec()];
             matice(matice1);
             VypisMatice(matice1);
 
@@ -181,35 +188,32 @@ namespace MaticePVA
                 }
             }
             VypisMatice(resultMatice);
-            Console.WriteLine();
             Start();
         }
 
         static void NasobeniCislem()
         {
-            Console.WriteLine("Matice");
             Console.Write("Zadej číslo pro násobení: ");
             int number = Convert.ToInt32(Console.ReadLine());
-            int[,] matice1 = new int[VelikostSloupec(), VelikostRadek()];
+            Console.WriteLine("Matice");
+            int[,] matice1 = new int[VelikostRadek(), VelikostSloupec()];
             matice(matice1);
             VypisMatice(matice1);
             Console.WriteLine($"*\n{number}\n=");
-            for (int i = 0; i < matice1.GetLength(1); i++)
+            for (int i = 0; i < matice1.GetLength(0); i++)
             {
-                for (int j = 0; j < matice1.GetLength(0); j++)
+                for (int j = 0; j < matice1.GetLength(1); j++)
                 {
-                    matice1[j, i] *= number;
+                    matice1[i, j] *= number;
                 }
             }
             VypisMatice(matice1);
-            Console.WriteLine();
             Start();
         }
 
         static void Nasobeni()
         {
-            Console.WriteLine("Násobení");
-            Console.WriteLine("První matice");
+            Console.WriteLine("Násobení\nPrvní matice");
             int[,] matice1 = new int[VelikostRadek(), VelikostSloupec()];
             matice(matice1);
 
@@ -223,9 +227,9 @@ namespace MaticePVA
                 Start();
             }
 
-            VypisMaticeFixed(matice1);
+            VypisMatice(matice1);
             Console.WriteLine("*");
-            VypisMaticeFixed(matice2);
+            VypisMatice(matice2);
             Console.WriteLine("=");
 
             int AR = matice1.GetLength(0);
@@ -244,8 +248,7 @@ namespace MaticePVA
                 }
             }
 
-            VypisMaticeFixed(result);
-            Console.WriteLine();
+            VypisMatice(result);
             Start();
         }
 
@@ -257,9 +260,9 @@ namespace MaticePVA
             int row = Convert.ToInt32(Console.ReadLine());
             try
             {
-                if(row == 0)
+                if(row <= 0)
                 {
-                    throw new Exception("Číslo nemuže být nula!!");
+                    throw new Exception("Číslo nemuže být nula ani záporné!!");
                 }               
             }
             catch(Exception ex) 
@@ -276,9 +279,9 @@ namespace MaticePVA
             int colum = Convert.ToInt32(Console.ReadLine());
             try
             {
-                if (colum == 0)
+                if (colum <= 0)
                 {
-                    throw new Exception("Číslo nemuže být nula!!");
+                    throw new Exception("Číslo nemuže být nula ani záporné!!");
                 }
             }
             catch (Exception ex)
@@ -293,30 +296,16 @@ namespace MaticePVA
             Random rnd = new Random();
 
             //sloupec
-            for (int i = 0; i < arr.GetLength(1); i++)
+            for (int i = 0; i < arr.GetLength(0); i++)
             {
                 //radek
-                for (int j = 0; j < arr.GetLength(0); j++)
+                for (int j = 0; j < arr.GetLength(1); j++)
                 {
-                    arr[j, i] = rnd.Next(-101, 101);
+                    arr[i, j] = rnd.Next(-101, 101);
                 }
             }
         }
         static void VypisMatice(int[,] arr)
-        {
-            //sloupec
-            for (int i = 0; i < arr.GetLength(1); i++)
-            {
-                //radek
-                for (int j = 0; j < arr.GetLength(0); j++)
-                {
-                    Console.Write(arr[j, i] + " ");
-                }
-                Console.WriteLine();
-            }
-        }
-
-        static void VypisMaticeFixed(int[,] arr)
         {
             //sloupec
             for (int i = 0; i < arr.GetLength(0); i++)
